@@ -1,46 +1,39 @@
-package kurs1LowLevel;
+package com.example.list;
+
+import java.util.Objects;
 
 public class Employee {
-    private String fullName;
-    private int department;
-    private float salary;
-    private int id;
+    private String firstName;
+    private String lastName;
 
-    public static int counterId = 1;
-
-    public String getFullName() {
-        return fullName;
+    public Employee(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
-    public int getDepartment() {
-        return department;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public float getSalary() {
-        return salary;
+    public String getLastName() {
+        return lastName;
     }
 
-    public int getId() {
-        return id;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Employee employee = (Employee) o;
+        return Objects.equals(firstName, employee.firstName) && Objects.equals(lastName, employee.lastName);
     }
 
-    public void setDepartment(int department) {
-        this.department = department;
-    }
-
-    public void setSalary(float salary) {
-        this.salary = salary;
-    }
-
-    public Employee(String fullName, int department, int salary) {
-        this.fullName = fullName;
-        this.department = department;
-        this.salary = salary;
-        this.id = counterId++;
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, lastName);
     }
 
     @Override
     public String toString() {
-        return "Ф.И.О.: " + this.getFullName() + " Отдел: " + this.getDepartment() + " Зарплата: " + this.getSalary();
+        return firstName + " " + lastName;
     }
 }
