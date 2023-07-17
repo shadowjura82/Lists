@@ -3,6 +3,7 @@ package com.example.list;
 import com.example.list.exceptions.EmployeeAlreadyAddedException;
 import com.example.list.exceptions.EmployeeNotFoundException;
 import com.example.list.exceptions.EmployeeStorageIsFullException;
+import com.example.list.exceptions.ValidationFailedException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public class EmployeeController {
             @RequestParam(name = "lastName") String lastName) {
         try {
             return employeeService.addEmployee(firstName, lastName);
-        } catch (EmployeeStorageIsFullException | EmployeeAlreadyAddedException e) {
+        } catch (EmployeeStorageIsFullException | EmployeeAlreadyAddedException | ValidationFailedException e) {
             System.out.println(e.getMessage());
             return null;
         }
@@ -34,7 +35,7 @@ public class EmployeeController {
             @RequestParam(name = "lastName") String lastName) {
         try {
             return employeeService.deleteEmployee(firstName, lastName);
-        } catch (EmployeeNotFoundException e) {
+        } catch (EmployeeNotFoundException | ValidationFailedException e) {
             System.out.println(e.getMessage());
             return null;
         }
@@ -46,7 +47,7 @@ public class EmployeeController {
             @RequestParam(name = "lastName") String lastName) {
         try {
             return employeeService.findEmployee(firstName, lastName);
-        } catch (EmployeeNotFoundException e) {
+        } catch (EmployeeNotFoundException | ValidationFailedException e) {
             System.out.println(e.getMessage());
             return null;
         }
